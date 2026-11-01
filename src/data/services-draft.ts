@@ -14,7 +14,7 @@ type ServiceDraft = Pick<
 const commonContraindications =
   "Острые воспаления и повышенная температура, кожные заболевания в зоне массажа, тромбоз, онкологические заболевания. При хронических болезнях сначала посоветуйтесь с врачом.";
 
-// TODO(content): prices are Moscow market minimums from Profi.ru (2026), the owner has to confirm them
+// Prices follow nearby studio price lists (birdblu.ru at Бунинская аллея, salon-caramel.ru), approved by the owner in Nov 2026
 // TODO(content): summaries and contraindications are drafts for Oleg to review
 // TODO(content): "Массаж спины и шеи" is named so until the medical licence question is settled (otherwise «Лечебный массаж»)
 export const servicesDraft: ServiceDraft[] = [
@@ -25,8 +25,8 @@ export const servicesDraft: ServiceDraft[] = [
       "Медленная глубокая работа с фасциями и мышцами. Снимает зажимы в шее, спине и плечах, которые остаются после долгого сидения.",
     audience: ["adults", "athletes"],
     options: [
-      { durationMinutes: 60, priceRub: 3000 },
-      { durationMinutes: 90, priceRub: 4300 },
+      { durationMinutes: 60, priceRub: 3200 },
+      { durationMinutes: 90, priceRub: 4500 },
     ],
     contraindications: commonContraindications,
     order: 10,
@@ -38,8 +38,8 @@ export const servicesDraft: ServiceDraft[] = [
       "Интенсивный моделирующий массаж бёдер, ягодиц и живота. Разгоняет лимфу и уменьшает отёки, лучше всего работает курсом из 10 сеансов.",
     audience: ["adults"],
     options: [
-      { durationMinutes: 60, priceRub: 3000 },
-      { durationMinutes: 90, priceRub: 4300 },
+      { durationMinutes: 60, priceRub: 3500 },
+      { durationMinutes: 90, priceRub: 4800 },
     ],
     contraindications: `${commonContraindications} Варикоз в зоне массажа.`,
     order: 20,
@@ -51,8 +51,8 @@ export const servicesDraft: ServiceDraft[] = [
       "Проработка шейно-воротниковой зоны и всей спины при скованности, тяжести в плечах и головной боли от напряжения.",
     audience: ["adults"],
     options: [
-      { durationMinutes: 30, priceRub: 1800 },
-      { durationMinutes: 60, priceRub: 2800 },
+      { durationMinutes: 30, priceRub: 2000 },
+      { durationMinutes: 60, priceRub: 3500 },
     ],
     contraindications: commonContraindications,
     order: 30,
@@ -64,8 +64,8 @@ export const servicesDraft: ServiceDraft[] = [
       "Общий массаж всего тела в спокойном темпе. Подходит после болезни, недосыпа и тяжёлой недели.",
     audience: ["adults"],
     options: [
-      { durationMinutes: 60, priceRub: 2800 },
-      { durationMinutes: 90, priceRub: 4000 },
+      { durationMinutes: 60, priceRub: 3500 },
+      { durationMinutes: 90, priceRub: 4500 },
     ],
     contraindications: commonContraindications,
     order: 40,
@@ -77,8 +77,8 @@ export const servicesDraft: ServiceDraft[] = [
       "Подготовка мышц перед стартом или восстановление после нагрузки. Мастер работает с теми группами мышц, которые нагружает ваш вид спорта.",
     audience: ["adults", "athletes"],
     options: [
-      { durationMinutes: 60, priceRub: 3000 },
-      { durationMinutes: 90, priceRub: 4300 },
+      { durationMinutes: 60, priceRub: 3500 },
+      { durationMinutes: 90, priceRub: 4800 },
     ],
     contraindications: `${commonContraindications} Свежие травмы и растяжения.`,
     order: 50,
@@ -90,8 +90,8 @@ export const servicesDraft: ServiceDraft[] = [
       "Мягкий массаж для детей: общий, при нарушениях осанки, для укрепления мышц. Родитель может присутствовать на сеансе.",
     audience: ["children"],
     options: [
-      { durationMinutes: 30, priceRub: 1700 },
-      { durationMinutes: 45, priceRub: 2200 },
+      { durationMinutes: 30, priceRub: 1800 },
+      { durationMinutes: 45, priceRub: 2300 },
     ],
     contraindications: commonContraindications,
     order: 60,
@@ -103,8 +103,8 @@ export const servicesDraft: ServiceDraft[] = [
       "Расслабляет жевательные мышцы и лоб, уменьшает утреннюю отёчность. Делается без косметических процедур.",
     audience: ["adults"],
     options: [
-      { durationMinutes: 30, priceRub: 1800 },
-      { durationMinutes: 45, priceRub: 2400 },
+      { durationMinutes: 30, priceRub: 2000 },
+      { durationMinutes: 45, priceRub: 2700 },
     ],
     contraindications: `${commonContraindications} Воспаления и высыпания на лице.`,
     order: 70,
@@ -115,7 +115,10 @@ export const servicesDraft: ServiceDraft[] = [
     summary:
       "Бережный массаж в удобном положении лёжа на боку. Снимает нагрузку с поясницы и ног.",
     audience: ["pregnant"],
-    options: [{ durationMinutes: 60, priceRub: 3000 }],
+    options: [
+      { durationMinutes: 30, priceRub: 2200 },
+      { durationMinutes: 60, priceRub: 3500 },
+    ],
     contraindications: `${commonContraindications} Угроза прерывания беременности, токсикоз, высокое давление. Нужно разрешение врача, ведущего беременность.`,
     order: 80,
   },
@@ -125,7 +128,7 @@ export const servicesDraft: ServiceDraft[] = [
     summary:
       "Массаж с мягкими мобилизациями суставов и вытяжением позвоночника. Помогает, когда после обычного массажа скованность быстро возвращается.",
     audience: ["adults", "athletes"],
-    options: [{ durationMinutes: 60, priceRub: 3500 }],
+    options: [{ durationMinutes: 60, priceRub: 4000 }],
     contraindications: `${commonContraindications} Грыжи и протрузии в острой стадии, остеопороз.`,
     order: 90,
   },
