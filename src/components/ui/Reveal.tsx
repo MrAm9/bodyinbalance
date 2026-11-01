@@ -2,21 +2,28 @@
 
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { SplitText } from "gsap/SplitText";
 import { useRef, type ReactNode } from "react";
 
-gsap.registerPlugin(useGSAP, SplitText);
+gsap.registerPlugin(useGSAP, ScrollTrigger, SplitText);
 
-const START_DELAY = 0.2;
-const STEP = 0.14;
+const LOAD_START_DELAY = 0.2;
+const LOAD_STEP = 0.14;
 
 interface RevealProps {
   children: ReactNode;
   className?: string;
+  // "load" plays once in document order, "scroll" plays each element when it enters the viewport
+  trigger?: "load" | "scroll";
 }
 
-// Animates [data-reveal] descendants in document order: "lines" splits text into masked lines, any other value fades up
-export function Reveal({ children, className }: RevealProps) {
+function scrollTriggerFor(target: HTMLElement): ScrollTrigger.Vars {
+  return { trigger: target, start: "top 88%", once: true };
+}
+
+// [data-reveal="lines"] splits text into masked lines, "photo" settles a picture into place, any other value fades up
+export function Reveal({ children, className, trigger = "load" }: RevealProps) {
   const scope = useRef<HTMLDivElement>(null);
 
   useGSAP(
@@ -27,7 +34,10 @@ export function Reveal({ children, className }: RevealProps) {
       const media = gsap.matchMedia();
       media.add("(prefers-reduced-motion: no-preference)", () => {
         targets.forEach((target, order) => {
-          const delay = START_DELAY + order * STEP;
+          const timing =
+            trigger === "load"
+              ? { delay: LOAD_START_DELAY + order * LOAD_STEP }
+              : { scrollTrigger: scrollTriggerFor(target) };
 
           if (target.dataset.reveal === "lines") {
             let linesTween: gsap.core.Tween | undefined;
@@ -44,10 +54,21 @@ export function Reveal({ children, className }: RevealProps) {
                   duration: 1.2,
                   stagger: 0.12,
                   ease: "power4.out",
-                  delay,
+                  ...timing,
                 });
                 if (finished) linesTween.progress(1);
               },
+            });
+            return;
+          }
+
+          if (target.dataset.reveal === "photo") {
+            gsap.from(target, {
+              scale: 1.06,
+              autoAlpha: 0,
+              duration: 1.6,
+              ease: "power2.out",
+              ...timing,
             });
             return;
           }
@@ -57,7 +78,7 @@ export function Reveal({ children, className }: RevealProps) {
             autoAlpha: 0,
             duration: 1.1,
             ease: "power3.out",
-            delay,
+            ...timing,
           });
         });
       });

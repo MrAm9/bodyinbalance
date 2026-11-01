@@ -11,6 +11,8 @@
   --color-paper: #faf5ef;
   --color-marble: #f3e7da;
   --color-ink: #4a3222;
+  --color-ink-muted: #6e5644;
+  --color-gold-deep: #8a6424;
   --color-gold: #c9994a;
   --color-gold-soft: #e2c48d;
   --color-olive: #5e6b3a;
@@ -19,6 +21,8 @@
 
   --text-hero: clamp(2.75rem, 1.4rem + 5.6vw, 5.75rem);
   --text-hero--line-height: 1;
+  --text-section: clamp(2.25rem, 1.5rem + 3vw, 4rem);
+  --text-section--line-height: 1.05;
   --text-eyebrow: 0.75rem;
   --text-eyebrow--letter-spacing: 0.28em;
 

@@ -8,6 +8,8 @@ export const buttonVariants = cva(
         gold: "bg-gold text-night hover:bg-gold-soft",
         outline:
           "border border-gold/50 text-cream hover:border-gold hover:bg-gold/10",
+        outlineInk:
+          "border border-ink/30 text-ink hover:border-ink hover:bg-ink/5",
       },
       size: {
         md: "px-6 py-3 text-sm",
