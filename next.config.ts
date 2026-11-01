@@ -7,8 +7,6 @@ import type { NextConfig } from "next";
 const dirname = path.dirname(fileURLToPath(import.meta.url));
 
 const nextConfig: NextConfig = {
-  cacheComponents: true,
-  partialPrefetching: true,
   reactCompiler: true,
   agentRules: false,
   trailingSlash: true,
