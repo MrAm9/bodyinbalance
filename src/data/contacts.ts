@@ -17,7 +17,7 @@ export const studio = {
   },
   yandexMapsUrl: "https://yandex.ru/maps/org/telo_v_balanse/70866995496/",
   phones: [
-    { display: "8 (938) 555-55-45", href: "tel:+79385555545" },
-    { display: "8 (985) 304-54-11", href: "tel:+79853045411" },
+    { display: "+7 (938) 553-55-45", href: "tel:+79385535545" },
+    { display: "+7 (985) 304-54-11", href: "tel:+79853045411" },
   ],
 } as const;
