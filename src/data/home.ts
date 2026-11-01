@@ -10,14 +10,14 @@ export const homeHero = {
   ],
   photo: {
     src: "/images/room-evening.jpg",
-    width: 876,
-    height: 607,
+    width: 2000,
+    height: 1386,
     alt: "Кабинет студии вечером: массажный стол с полотенцами и свечой, зелёные шторы, торшер",
   },
   detailPhoto: {
     src: "/images/candle-lantern.jpg",
-    width: 494,
-    height: 405,
+    width: 2000,
+    height: 1640,
     alt: "",
   },
 } as const;
