@@ -7,8 +7,12 @@ import { ru } from "@payloadcms/translations/languages/ru";
 import { buildConfig } from "payload";
 import sharp from "sharp";
 
+import { Bookings } from "./collections/Bookings";
+import { DaysOff } from "./collections/DaysOff";
 import { Media } from "./collections/Media";
+import { Services } from "./collections/Services";
 import { Users } from "./collections/Users";
+import { Schedule } from "./globals/Schedule";
 import { env } from "./lib/env";
 
 const dirname = path.dirname(fileURLToPath(import.meta.url));
@@ -23,7 +27,8 @@ export default buildConfig({
     supportedLanguages: { ru },
     fallbackLanguage: "ru",
   },
-  collections: [Users, Media],
+  collections: [Bookings, Services, DaysOff, Media, Users],
+  globals: [Schedule],
   editor: lexicalEditor(),
   secret: env.PAYLOAD_SECRET,
   typescript: { outputFile: path.resolve(dirname, "payload-types.ts") },

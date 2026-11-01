@@ -67,8 +67,11 @@ export interface Config {
   };
   blocks: {};
   collections: {
-    users: User;
+    bookings: Booking;
+    services: Service;
+    'days-off': DaysOff;
     media: Media;
+    users: User;
     'payload-kv': PayloadKv;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
@@ -76,8 +79,11 @@ export interface Config {
   };
   collectionsJoins: {};
   collectionsSelect: {
-    users: UsersSelect<false> | UsersSelect<true>;
+    bookings: BookingsSelect<false> | BookingsSelect<true>;
+    services: ServicesSelect<false> | ServicesSelect<true>;
+    'days-off': DaysOffSelect<false> | DaysOffSelect<true>;
     media: MediaSelect<false> | MediaSelect<true>;
+    users: UsersSelect<false> | UsersSelect<true>;
     'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
@@ -87,8 +93,12 @@ export interface Config {
     defaultIDType: number;
   };
   fallbackLocale: null;
-  globals: {};
-  globalsSelect: {};
+  globals: {
+    schedule: Schedule;
+  };
+  globalsSelect: {
+    schedule: ScheduleSelect<false> | ScheduleSelect<true>;
+  };
   locale: null;
   widgets: {
     collections: CollectionsWidget;
@@ -119,6 +129,120 @@ export interface UserAuthOperations {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "bookings".
+ */
+export interface Booking {
+  id: number;
+  startsAt: string;
+  startsAt_tz: SupportedTimezones;
+  durationMinutes: number;
+  /**
+   * Считается автоматически: начало плюс длительность.
+   */
+  endsAt?: string | null;
+  service: number | Service;
+  clientName: string;
+  phone: string;
+  comment?: string | null;
+  status: 'new' | 'confirmed' | 'cancelled' | 'done';
+  source: 'site' | 'admin';
+  consentAt?: string | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "services".
+ */
+export interface Service {
+  id: number;
+  title: string;
+  /**
+   * Латиницей через дефис. Если оставить пустым, заполнится из названия.
+   */
+  slug: string;
+  isActive?: boolean | null;
+  /**
+   * Меньше число — выше в списке.
+   */
+  order?: number | null;
+  /**
+   * Одно-два предложения для карточки в списке.
+   */
+  summary: string;
+  audience?: ('adults' | 'children' | 'pregnant' | 'athletes')[] | null;
+  options: {
+    durationMinutes: number;
+    priceRub: number;
+    id?: string | null;
+  }[];
+  description?: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  contraindications?: string | null;
+  faq?:
+    | {
+        question: string;
+        answer: string;
+        id?: string | null;
+      }[]
+    | null;
+  seo?: {
+    title?: string | null;
+    description?: string | null;
+  };
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * В эти промежутки запись на сайте недоступна.
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "days-off".
+ */
+export interface DaysOff {
+  id: number;
+  startsAt: string;
+  startsAt_tz: SupportedTimezones;
+  endsAt: string;
+  endsAt_tz: SupportedTimezones;
+  reason: string;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "media".
+ */
+export interface Media {
+  id: number;
+  alt: string;
+  updatedAt: string;
+  createdAt: string;
+  url?: string | null;
+  thumbnailURL?: string | null;
+  filename?: string | null;
+  mimeType?: string | null;
+  filesize?: number | null;
+  width?: number | null;
+  height?: number | null;
+  focalX?: number | null;
+  focalY?: number | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "users".
  */
 export interface User {
@@ -146,25 +270,6 @@ export interface User {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "media".
- */
-export interface Media {
-  id: number;
-  alt: string;
-  updatedAt: string;
-  createdAt: string;
-  url?: string | null;
-  thumbnailURL?: string | null;
-  filename?: string | null;
-  mimeType?: string | null;
-  filesize?: number | null;
-  width?: number | null;
-  height?: number | null;
-  focalX?: number | null;
-  focalY?: number | null;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-kv".
  */
 export interface PayloadKv {
@@ -188,12 +293,24 @@ export interface PayloadLockedDocument {
   id: number;
   document?:
     | ({
-        relationTo: 'users';
-        value: number | User;
+        relationTo: 'bookings';
+        value: number | Booking;
+      } | null)
+    | ({
+        relationTo: 'services';
+        value: number | Service;
+      } | null)
+    | ({
+        relationTo: 'days-off';
+        value: number | DaysOff;
       } | null)
     | ({
         relationTo: 'media';
         value: number | Media;
+      } | null)
+    | ({
+        relationTo: 'users';
+        value: number | User;
       } | null);
   globalSlug?: string | null;
   user: {
@@ -239,6 +356,92 @@ export interface PayloadMigration {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "bookings_select".
+ */
+export interface BookingsSelect<T extends boolean = true> {
+  startsAt?: T;
+  startsAt_tz?: T;
+  durationMinutes?: T;
+  endsAt?: T;
+  service?: T;
+  clientName?: T;
+  phone?: T;
+  comment?: T;
+  status?: T;
+  source?: T;
+  consentAt?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "services_select".
+ */
+export interface ServicesSelect<T extends boolean = true> {
+  title?: T;
+  slug?: T;
+  isActive?: T;
+  order?: T;
+  summary?: T;
+  audience?: T;
+  options?:
+    | T
+    | {
+        durationMinutes?: T;
+        priceRub?: T;
+        id?: T;
+      };
+  description?: T;
+  contraindications?: T;
+  faq?:
+    | T
+    | {
+        question?: T;
+        answer?: T;
+        id?: T;
+      };
+  seo?:
+    | T
+    | {
+        title?: T;
+        description?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "days-off_select".
+ */
+export interface DaysOffSelect<T extends boolean = true> {
+  startsAt?: T;
+  startsAt_tz?: T;
+  endsAt?: T;
+  endsAt_tz?: T;
+  reason?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "media_select".
+ */
+export interface MediaSelect<T extends boolean = true> {
+  alt?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  url?: T;
+  thumbnailURL?: T;
+  filename?: T;
+  mimeType?: T;
+  filesize?: T;
+  width?: T;
+  height?: T;
+  focalX?: T;
+  focalY?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "users_select".
  */
 export interface UsersSelect<T extends boolean = true> {
@@ -260,24 +463,6 @@ export interface UsersSelect<T extends boolean = true> {
         createdAt?: T;
         expiresAt?: T;
       };
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "media_select".
- */
-export interface MediaSelect<T extends boolean = true> {
-  alt?: T;
-  updatedAt?: T;
-  createdAt?: T;
-  url?: T;
-  thumbnailURL?: T;
-  filename?: T;
-  mimeType?: T;
-  filesize?: T;
-  width?: T;
-  height?: T;
-  focalX?: T;
-  focalY?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -318,6 +503,40 @@ export interface PayloadMigrationsSelect<T extends boolean = true> {
   batch?: T;
   updatedAt?: T;
   createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "schedule".
+ */
+export interface Schedule {
+  id: number;
+  opensAt: string;
+  closesAt: string;
+  workingWeekdays: ('1' | '2' | '3' | '4' | '5' | '6' | '0')[];
+  bufferMinutes: number;
+  slotStepMinutes: number;
+  minLeadMinutes: number;
+  horizonDays: number;
+  cancellationRule: string;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "schedule_select".
+ */
+export interface ScheduleSelect<T extends boolean = true> {
+  opensAt?: T;
+  closesAt?: T;
+  workingWeekdays?: T;
+  bufferMinutes?: T;
+  slotStepMinutes?: T;
+  minLeadMinutes?: T;
+  horizonDays?: T;
+  cancellationRule?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
