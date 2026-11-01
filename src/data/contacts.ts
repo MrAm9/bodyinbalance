@@ -5,7 +5,7 @@ export const studio = {
   address: {
     city: "Москва",
     postalCode: "117041",
-    street: "ул. Ахмата Кадырова, д. 8, корп. 1",
+    street: "ул.\u00a0Ахмата Кадырова, д.\u00a08, корп.\u00a01",
     district: "Южное Бутово",
     metro: "Бунинская аллея",
     walkFromMetro: "5–10 минут пешком",
@@ -16,6 +16,8 @@ export const studio = {
     closes: "22:00",
   },
   yandexMapsUrl: "https://yandex.ru/maps/org/telo_v_balanse/70866995496/",
+  // Taken from the Yandex Maps card link; the route ends at the building, not the entrance
+  coordinates: { latitude: 55.538799, longitude: 37.511445 },
   phones: [
     { display: "+7 (938) 553-55-45", href: "tel:+79385535545" },
     { display: "+7 (985) 304-54-11", href: "tel:+79853045411" },

@@ -8,4 +8,12 @@ export const ru = {
   hero: {
     call: "Позвонить",
   },
+  services: {
+    from: "от",
+    minutes: "мин",
+  },
+  footer: {
+    navigation: "Разделы сайта",
+    warning: "Имеются противопоказания. Необходима консультация специалиста.",
+  },
 } as const;

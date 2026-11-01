@@ -1,5 +1,6 @@
 import { Cormorant, Manrope } from "next/font/google";
 
+import { Footer } from "@/components/layout/Footer";
 import { Header } from "@/components/layout/Header";
 import { cn } from "@/lib/utils";
 
@@ -33,6 +34,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       <body>
         <Header />
         {children}
+        <Footer />
       </body>
     </html>
   );

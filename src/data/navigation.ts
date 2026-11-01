@@ -5,3 +5,10 @@ export const mainNavigation = [
 ] as const;
 
 export const bookingHref = "/zapis/";
+
+export const legalNavigation = [
+  {
+    label: "Политика конфиденциальности",
+    href: "/politika-konfidencialnosti/",
+  },
+] as const;
