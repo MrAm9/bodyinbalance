@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import { Fragment } from "react";
 
 import { buttonVariants } from "@/components/ui/button-variants";
 import { Reveal } from "@/components/ui/Reveal";
@@ -32,7 +33,12 @@ export function Hero() {
             data-reveal="lines"
             className="mt-8 max-w-3xl font-display text-hero font-medium text-balance text-cream"
           >
-            {homeHero.title}
+            {/* SplitText turns non-breaking spaces into wrap points, so words joined by them are held together explicitly */}
+            {homeHero.title.split(" ").map((word) => (
+              <Fragment key={word}>
+                <span className="whitespace-nowrap">{word}</span>{" "}
+              </Fragment>
+            ))}
           </h1>
 
           <p
