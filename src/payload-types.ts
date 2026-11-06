@@ -94,9 +94,11 @@ export interface Config {
   };
   fallbackLocale: null;
   globals: {
+    'studio-info': StudioInfo;
     schedule: Schedule;
   };
   globalsSelect: {
+    'studio-info': StudioInfoSelect<false> | StudioInfoSelect<true>;
     schedule: ScheduleSelect<false> | ScheduleSelect<true>;
   };
   locale: null;
@@ -505,6 +507,37 @@ export interface PayloadMigrationsSelect<T extends boolean = true> {
   createdAt?: T;
 }
 /**
+ * Необязательные поля. Пока поле пустое, на сайте его блок не показывается или стоит заглушка.
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "studio-info".
+ */
+export interface StudioInfo {
+  id: number;
+  /**
+   * Подъезд, этаж, домофон, ориентиры. Показывается на странице «Контакты» и на главной.
+   */
+  entrance?: string | null;
+  parking?: string | null;
+  /**
+   * Лучше вертикальное фото в кабинете. Пока фото нет, показывается эмблема студии.
+   */
+  masterPhoto?: (number | null) | Media;
+  /**
+   * Стаж, образование, курсы, с чем чаще приходят. Абзацы разделяйте пустой строкой.
+   */
+  masterAbout?: string | null;
+  /**
+   * Например: ИП Андреев Олег Владимирович
+   */
+  legalName?: string | null;
+  inn?: string | null;
+  ogrn?: string | null;
+  email?: string | null;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "schedule".
  */
@@ -520,6 +553,23 @@ export interface Schedule {
   cancellationRule: string;
   updatedAt?: string | null;
   createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "studio-info_select".
+ */
+export interface StudioInfoSelect<T extends boolean = true> {
+  entrance?: T;
+  parking?: T;
+  masterPhoto?: T;
+  masterAbout?: T;
+  legalName?: T;
+  inn?: T;
+  ogrn?: T;
+  email?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema

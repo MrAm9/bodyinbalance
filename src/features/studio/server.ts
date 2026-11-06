@@ -1,0 +1,1 @@
+export { getStudioInfo } from "./queries";

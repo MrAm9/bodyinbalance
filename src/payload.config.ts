@@ -13,6 +13,7 @@ import { Media } from "./collections/Media";
 import { Services } from "./collections/Services";
 import { Users } from "./collections/Users";
 import { Schedule } from "./globals/Schedule";
+import { StudioInfo } from "./globals/StudioInfo";
 import { env } from "./lib/env";
 
 const dirname = path.dirname(fileURLToPath(import.meta.url));
@@ -28,7 +29,7 @@ export default buildConfig({
     fallbackLanguage: "ru",
   },
   collections: [Bookings, Services, DaysOff, Media, Users],
-  globals: [Schedule],
+  globals: [StudioInfo, Schedule],
   editor: lexicalEditor(),
   secret: env.PAYLOAD_SECRET,
   typescript: { outputFile: path.resolve(dirname, "payload-types.ts") },

@@ -16,4 +16,5 @@ npm run typecheck
 Переменные окружения:
 
 - `DATABASE_URL` — строка подключения к PostgreSQL, например `postgres://user@localhost:5432/bodyinbalance`
+- `SITE_URL` — адрес сайта без слэша в конце, нужен для canonical и sitemap
 - `PAYLOAD_SECRET` — случайная строка не короче 32 символов (`openssl rand -hex 32`)
