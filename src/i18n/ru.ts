@@ -12,6 +12,12 @@ export const ru = {
     label: "Навигационная цепочка",
     home: "Главная",
   },
+  gallery: {
+    open: "Открыть фото",
+    close: "Закрыть",
+    previous: "Назад",
+    next: "Дальше",
+  },
   services: {
     from: "от",
     minutes: "мин",

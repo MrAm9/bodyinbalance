@@ -56,7 +56,7 @@ export function ServicesMenu({ services }: ServicesMenuProps) {
           )}
         </div>
 
-        <ul className="mt-16 grid gap-x-16 md:grid-cols-2">
+        <ul className="mt-16 grid gap-x-16 lg:grid-cols-2">
           {services.map((service) => (
             <li key={service.id} data-reveal className="border-t border-ink/15">
               <Link

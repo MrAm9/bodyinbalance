@@ -87,18 +87,8 @@ export function Hero() {
                 height={homeHero.photo.height}
                 loading="eager"
                 fetchPriority="high"
-                sizes="(min-width: 1024px) 34vw, (min-width: 640px) 28rem, 90vw"
+                sizes="(min-width: 1024px) 34vw, 100vw"
                 className="size-full object-cover motion-safe:animate-ken-burns"
-              />
-            }
-            detail={
-              <Image
-                src={homeHero.detailPhoto.src}
-                alt={homeHero.detailPhoto.alt}
-                width={homeHero.detailPhoto.width}
-                height={homeHero.detailPhoto.height}
-                sizes="(min-width: 1024px) 14vw, 40vw"
-                className="size-full object-cover"
               />
             }
           />

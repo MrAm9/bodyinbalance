@@ -14,12 +14,6 @@ export const homeHero = {
     height: 1386,
     alt: "Кабинет студии вечером: массажный стол с полотенцами и свечой, зелёные шторы, торшер",
   },
-  detailPhoto: {
-    src: "/images/candle-lantern.jpg",
-    width: 2000,
-    height: 1640,
-    alt: "",
-  },
 } as const;
 
 export const homeConcerns = {
@@ -73,6 +67,13 @@ export const homeStudio = {
   lead: "Один кабинет и один мастер: в коридоре никого не ждёте, на сеансе только вы и Олег. Свежие полотенца и масло — к каждому сеансу.",
   photos: [
     {
+      id: "room",
+      src: "/images/room-real.jpg",
+      width: 1920,
+      height: 2560,
+      alt: "Кабинет целиком: массажный стол, растение у окна, диван и торшер",
+    },
+    {
       id: "towels",
       src: "/images/towels-candle.jpg",
       width: 2000,
@@ -94,11 +95,18 @@ export const homeStudio = {
       alt: "Флакон с массажным маслом, цветы и аромадиффузор на подносе",
     },
     {
-      id: "room",
-      src: "/images/room-real.jpg",
-      width: 1920,
-      height: 2560,
-      alt: "Кабинет целиком: массажный стол, растение у окна, диван и торшер",
+      id: "candle",
+      src: "/images/candle-lantern.jpg",
+      width: 2000,
+      height: 1640,
+      alt: "Свеча и фонарь с узором на столике у дивана",
+    },
+    {
+      id: "evening",
+      src: "/images/room-evening.jpg",
+      width: 2000,
+      height: 1386,
+      alt: "Кабинет вечером: массажный стол с полотенцами и свечой, зелёные шторы",
     },
   ],
 } as const;
