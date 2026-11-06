@@ -4,13 +4,13 @@ import Link from "next/link";
 import { buttonVariants } from "@/components/ui/button-variants";
 import { NoBreakWords } from "@/components/ui/NoBreakWords";
 import { Reveal } from "@/components/ui/Reveal";
+import { WarmGlows } from "@/components/ui/WarmGlows";
 import { studio } from "@/data/contacts";
 import { homeHero } from "@/data/home";
 import { bookingHref } from "@/data/navigation";
 import { ru } from "@/i18n/ru";
 
-import { HeroArch } from "./HeroArch";
-import { WarmGlows } from "@/components/ui/WarmGlows";
+import { HeroPhotos } from "./HeroPhotos";
 
 export function Hero() {
   const [mainPhone] = studio.phones;
@@ -78,7 +78,7 @@ export function Hero() {
         </div>
 
         <div data-reveal className="lg:col-span-5">
-          <HeroArch
+          <HeroPhotos
             photo={
               <Image
                 src={homeHero.photo.src}
@@ -97,7 +97,7 @@ export function Hero() {
                 alt={homeHero.detailPhoto.alt}
                 width={homeHero.detailPhoto.width}
                 height={homeHero.detailPhoto.height}
-                sizes="10rem"
+                sizes="(min-width: 1024px) 14vw, 40vw"
                 className="size-full object-cover"
               />
             }

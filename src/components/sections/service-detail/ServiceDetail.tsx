@@ -68,7 +68,7 @@ export function ServiceDetail({ service }: ServiceDetailProps) {
         </div>
 
         <aside data-reveal className="lg:col-span-5">
-          <div className="rounded-t-full bg-night px-8 pt-20 pb-10 text-cream lg:sticky lg:top-10">
+          <div className="rounded-lg bg-night px-8 py-10 text-cream lg:sticky lg:top-10">
             <h2 className="text-center font-display text-2xl">
               {servicePage.pricesTitle}
             </h2>

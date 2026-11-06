@@ -56,17 +56,18 @@ export function Concerns({ services }: ConcernsProps) {
                   {typograph(item.concern)}
                 </p>
                 {linkedServices.length > 0 && (
-                  <p className="flex flex-wrap gap-x-4 gap-y-1 text-sm sm:col-span-2 sm:justify-end sm:pt-1.5">
+                  <ul className="flex flex-col items-start gap-2 text-sm sm:col-span-2 sm:pt-1.5">
                     {linkedServices.map((service) => (
-                      <Link
-                        key={service.id}
-                        href={`/massazh/${service.slug}/`}
-                        className="text-olive underline decoration-olive/30 underline-offset-4 transition-colors hover:decoration-olive"
-                      >
-                        {service.title}
-                      </Link>
+                      <li key={service.id}>
+                        <Link
+                          href={`/massazh/${service.slug}/`}
+                          className="text-olive underline decoration-olive/30 underline-offset-4 transition-colors hover:decoration-olive"
+                        >
+                          {service.title}
+                        </Link>
+                      </li>
                     ))}
-                  </p>
+                  </ul>
                 )}
               </li>
             );

@@ -20,7 +20,7 @@ export function BookingOptions({ services }: BookingOptionsProps) {
         <div className="grid gap-6 md:grid-cols-2">
           <div
             data-reveal
-            className="flex flex-col rounded-t-full bg-night px-8 pt-24 pb-10 text-center text-cream"
+            className="flex flex-col rounded-lg bg-night px-8 py-12 text-center text-cream"
           >
             <h2 className="font-display text-3xl">
               {bookingPage.online.title}
@@ -43,7 +43,7 @@ export function BookingOptions({ services }: BookingOptionsProps) {
 
           <div
             data-reveal
-            className="flex flex-col rounded-t-full border border-ink/15 px-8 pt-24 pb-10 text-center"
+            className="flex flex-col rounded-lg border border-ink/15 px-8 py-12 text-center"
           >
             <h2 className="font-display text-3xl text-ink">
               {bookingPage.phone.title}

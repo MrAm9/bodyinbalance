@@ -7,22 +7,22 @@ import { homeStudio } from "@/data/home";
 import { typograph } from "@/lib/typograph";
 import { cn } from "@/lib/utils";
 
-// Layout per photo id keeps the collage asymmetric: one wide shot, one arch, two smaller details
+// Layout per photo id keeps the collage asymmetric: one wide shot, one tall shot, two smaller details
 const photoLayout = {
   towels: {
-    frame: "col-span-2 aspect-4/3 rounded-sm lg:col-span-7",
+    frame: "col-span-2 aspect-4/3 lg:col-span-7",
     sizes: "(min-width: 1024px) 55vw, 100vw",
   },
   room: {
-    frame: "aspect-3/4 col-span-2 sm:col-span-1 lg:col-span-4 rounded-t-full",
+    frame: "col-span-2 aspect-3/4 sm:col-span-1 lg:col-span-4",
     sizes: "(min-width: 1024px) 30vw, (min-width: 640px) 50vw, 100vw",
   },
   sofa: {
-    frame: "aspect-4/3 lg:col-span-5 lg:self-end rounded-sm",
+    frame: "aspect-4/3 lg:col-span-5 lg:self-end",
     sizes: "(min-width: 1024px) 40vw, 50vw",
   },
   oil: {
-    frame: "aspect-square lg:col-span-3 lg:self-center rounded-full",
+    frame: "aspect-3/4 lg:col-span-3 lg:self-end",
     sizes: "(min-width: 1024px) 22vw, 50vw",
   },
 } satisfies Record<
@@ -62,7 +62,7 @@ export function StudioGallery() {
             <div
               key={photo.id}
               className={cn(
-                "relative overflow-hidden ring-1 ring-gold/20",
+                "relative overflow-hidden rounded-md",
                 layout.frame,
               )}
             >

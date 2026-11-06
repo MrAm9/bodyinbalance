@@ -14,12 +14,12 @@ interface PortraitProps {
   className?: string;
 }
 
-// Arch-shaped portrait; until a real photo is uploaded the studio emblem stands in
+// Until a real photo is uploaded the studio emblem stands in
 export function Portrait({ photo, className }: PortraitProps) {
   return (
     <div
       className={cn(
-        "relative mx-auto aspect-3/4 w-full max-w-sm overflow-hidden rounded-t-full bg-night ring-1 ring-gold/40",
+        "relative mx-auto aspect-3/4 w-full max-w-sm overflow-hidden rounded-md bg-night",
         className,
       )}
     >
