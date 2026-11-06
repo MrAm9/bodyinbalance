@@ -1,7 +1,9 @@
+import type { Metadata } from "next";
 import { Cormorant, Manrope } from "next/font/google";
 
 import { Footer } from "@/components/layout/Footer";
 import { Header } from "@/components/layout/Header";
+import { env } from "@/lib/env";
 import { cn } from "@/lib/utils";
 
 import "@/styles/global.css";
@@ -17,6 +19,10 @@ const manrope = Manrope({
   subsets: ["latin", "cyrillic"],
   variable: "--font-manrope",
 });
+
+export const metadata: Metadata = {
+  metadataBase: new URL(env.SITE_URL),
+};
 
 // Marks that JS runs, so [data-reveal] elements can wait hidden for GSAP instead of flashing
 const markJs = "document.documentElement.classList.add('js')";

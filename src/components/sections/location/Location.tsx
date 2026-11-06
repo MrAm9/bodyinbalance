@@ -6,7 +6,12 @@ import { studio } from "@/data/contacts";
 import { homeLocation } from "@/data/home";
 import { typograph } from "@/lib/typograph";
 
-export function Location() {
+interface LocationProps {
+  // Shown on the home page; the contacts page has its own entrance block
+  entrance?: string;
+}
+
+export function Location({ entrance }: LocationProps) {
   const { latitude, longitude } = studio.coordinates;
   const routeHref = `https://yandex.ru/maps/?rtext=~${String(latitude)},${String(longitude)}&rtt=pd`;
 
@@ -37,6 +42,11 @@ export function Location() {
           <p data-reveal className="mt-4 text-cream-muted">
             {typograph(homeLocation.directions)}
           </p>
+          {entrance && (
+            <p data-reveal className="mt-2 max-w-md text-cream-muted">
+              {typograph(entrance)}
+            </p>
+          )}
           <div data-reveal className="mt-10 flex flex-wrap gap-4">
             <a
               href={routeHref}

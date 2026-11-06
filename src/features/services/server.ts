@@ -1,1 +1,1 @@
-export { getActiveServices } from "./queries";
+export { getActiveServices, getServiceBySlug } from "./queries";

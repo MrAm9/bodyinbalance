@@ -6,6 +6,8 @@ import { studio } from "@/data/contacts";
 import { bookingHref, mainNavigation } from "@/data/navigation";
 import { ru } from "@/i18n/ru";
 
+import { MobileMenu } from "./MobileMenu";
+
 export function Header() {
   const [mainPhone] = studio.phones;
 
@@ -61,7 +63,7 @@ export function Header() {
           </Link>
         </div>
 
-        <details className="group relative lg:hidden">
+        <MobileMenu>
           <summary className="flex cursor-pointer list-none items-center gap-2 rounded-full border border-gold/40 px-4 py-2 text-sm [&::-webkit-details-marker]:hidden">
             {ru.header.openMenu}
             <span aria-hidden className="flex w-4 flex-col gap-1">
@@ -92,7 +94,7 @@ export function Header() {
               {ru.header.book}
             </Link>
           </nav>
-        </details>
+        </MobileMenu>
       </div>
     </header>
   );

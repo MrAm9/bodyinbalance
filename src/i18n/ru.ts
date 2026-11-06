@@ -8,6 +8,10 @@ export const ru = {
   hero: {
     call: "Позвонить",
   },
+  breadcrumbs: {
+    label: "Навигационная цепочка",
+    home: "Главная",
+  },
   services: {
     from: "от",
     minutes: "мин",

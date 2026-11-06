@@ -16,6 +16,9 @@ export const studio = {
     closes: "22:00",
   },
   yandexMapsUrl: "https://yandex.ru/maps/org/telo_v_balanse/70866995496/",
+  // Opens the YCLIENTS-powered booking widget on the Yandex Maps card
+  yandexBookingUrl:
+    "https://yandex.ru/maps/org/telo_v_balanse/70866995496/?booking%5Bpage%5D=services&booking%5Bpermalink%5D=70866995496",
   // Taken from the Yandex Maps card link; the route ends at the building, not the entrance
   coordinates: { latitude: 55.538799, longitude: 37.511445 },
   phones: [

@@ -130,7 +130,6 @@ export const homeBooking = {
 export const homeLocation = {
   eyebrow: "Как добраться",
   title: "У метро «Бунинская аллея»",
-  // TODO(content): entrance, floor, intercom and parking details from the owner
   directions: "От метро 5–10 минут пешком.",
   labels: { hours: "Режим работы", metro: "Метро", phones: "Телефоны" },
   routeAction: "Построить маршрут",
