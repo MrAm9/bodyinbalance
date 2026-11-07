@@ -1,4 +1,3 @@
-import { RichText } from "@payloadcms/richtext-lexical/react";
 import Link from "next/link";
 
 import { buttonVariants } from "@/components/ui/button-variants";
@@ -9,7 +8,7 @@ import { servicePage } from "@/data/pages";
 import { formatRub } from "@/features/services";
 import { ru } from "@/i18n/ru";
 import { typograph } from "@/lib/typograph";
-import type { Service } from "@/payload-types";
+import type { Service } from "@/data/services";
 
 interface ServiceDetailProps {
   service: Service;
@@ -18,7 +17,8 @@ interface ServiceDetailProps {
 const blockTitle = "font-display text-3xl text-ink";
 
 export function ServiceDetail({ service }: ServiceDetailProps) {
-  const audience = service.audience ?? [];
+  const { audience } = service;
+  const description = service.description ?? [servicePage.descriptionFallback];
 
   return (
     <section aria-label={service.title} className="bg-paper py-20 sm:py-28">
@@ -29,12 +29,10 @@ export function ServiceDetail({ service }: ServiceDetailProps) {
         <div className="flex flex-col gap-14 lg:col-span-7">
           <div data-reveal>
             <h2 className={blockTitle}>{servicePage.descriptionTitle}</h2>
-            <div className="mt-5 space-y-4 leading-relaxed text-ink-muted [&_a]:underline [&_li]:ml-5 [&_ul]:list-disc">
-              {service.description ? (
-                <RichText data={service.description} />
-              ) : (
-                <p>{typograph(servicePage.descriptionFallback)}</p>
-              )}
+            <div className="mt-5 space-y-4 leading-relaxed text-ink-muted">
+              {description.map((paragraph) => (
+                <p key={paragraph}>{typograph(paragraph)}</p>
+              ))}
             </div>
           </div>
 
@@ -75,7 +73,7 @@ export function ServiceDetail({ service }: ServiceDetailProps) {
             <dl className="mt-8 flex flex-col">
               {service.options.map((option) => (
                 <div
-                  key={option.id ?? option.durationMinutes}
+                  key={option.durationMinutes}
                   className="flex items-baseline gap-3 border-t border-gold/20 py-4"
                 >
                   <dt className="text-cream-muted">

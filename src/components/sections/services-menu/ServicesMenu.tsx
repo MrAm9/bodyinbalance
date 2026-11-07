@@ -8,7 +8,7 @@ import { bookingHref } from "@/data/navigation";
 import { formatRub, lowestPrice, sharedPriceList } from "@/features/services";
 import { ru } from "@/i18n/ru";
 import { typograph } from "@/lib/typograph";
-import type { Service } from "@/payload-types";
+import type { Service } from "@/data/services";
 
 interface ServicesMenuProps {
   services: Service[];
@@ -40,7 +40,7 @@ export function ServicesMenu({ services }: ServicesMenuProps) {
               <dl className="mt-4 grid grid-cols-3 gap-4 border-t border-gold-deep/40 pt-4">
                 {sharedPrices.map((option) => (
                   <div
-                    key={option.id ?? option.durationMinutes}
+                    key={option.durationMinutes}
                     className="flex flex-col-reverse gap-1"
                   >
                     <dt className="text-xs text-ink-muted">
@@ -58,7 +58,11 @@ export function ServicesMenu({ services }: ServicesMenuProps) {
 
         <ul className="mt-16 grid gap-x-16 lg:grid-cols-2">
           {services.map((service) => (
-            <li key={service.id} data-reveal className="border-t border-ink/15">
+            <li
+              key={service.slug}
+              data-reveal
+              className="border-t border-ink/15"
+            >
               <Link
                 href={`/massazh/${service.slug}/`}
                 className="group flex flex-col gap-2 py-6"

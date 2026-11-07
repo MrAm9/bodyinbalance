@@ -11,19 +11,16 @@ import { studio } from "@/data/contacts";
 import { bookingHref } from "@/data/navigation";
 import { servicePage, servicesPage } from "@/data/pages";
 import { pageSeo } from "@/data/seo";
-import {
-  getActiveServices,
-  getServiceBySlug,
-} from "@/features/services/server";
+import { services } from "@/data/services";
+import { getServiceBySlug, otherServices } from "@/features/services";
 import { ru } from "@/i18n/ru";
 import { env } from "@/lib/env";
 import { serviceSchema } from "@/lib/schema";
 import { buildMetadata } from "@/lib/seo";
 
-export const revalidate = 300;
+export const dynamicParams = false;
 
-export async function generateStaticParams() {
-  const services = await getActiveServices();
+export function generateStaticParams() {
   return services.map((service) => ({ slug: service.slug }));
 }
 
@@ -31,7 +28,7 @@ export async function generateMetadata({
   params,
 }: PageProps<"/massazh/[slug]">): Promise<Metadata> {
   const { slug } = await params;
-  const service = await getServiceBySlug(slug);
+  const service = getServiceBySlug(slug);
   if (!service) return {};
 
   return buildMetadata({
@@ -47,10 +44,7 @@ export default async function ServicePage({
   params,
 }: PageProps<"/massazh/[slug]">) {
   const { slug } = await params;
-  const [service, services] = await Promise.all([
-    getServiceBySlug(slug),
-    getActiveServices(),
-  ]);
+  const service = getServiceBySlug(slug);
   if (!service) notFound();
 
   const path = `/massazh/${service.slug}/`;
@@ -91,7 +85,7 @@ export default async function ServicePage({
       <ServiceDetail service={service} />
       <ServiceFaqAndOthers
         service={service}
-        otherServices={services.filter((other) => other.id !== service.id)}
+        otherServices={otherServices(service)}
       />
     </main>
   );

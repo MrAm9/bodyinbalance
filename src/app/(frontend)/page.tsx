@@ -6,31 +6,22 @@ import { Location } from "@/components/sections/location/Location";
 import { MasterIntro } from "@/components/sections/master-intro/MasterIntro";
 import { ServicesMenu } from "@/components/sections/services-menu/ServicesMenu";
 import { StudioGallery } from "@/components/sections/studio-gallery/StudioGallery";
-import { master, masterDocumentPlaceholders } from "@/data/master";
+import { JsonLd } from "@/components/ui/JsonLd";
+import { studio } from "@/data/contacts";
+import { homeFaq } from "@/data/faq";
+import { master } from "@/data/master";
 import { contactsPage, masterPage } from "@/data/pages";
 import { pageSeo } from "@/data/seo";
-import { homeFaq } from "@/data/faq";
-import { studio } from "@/data/contacts";
-import { getActiveServices } from "@/features/services/server";
-import { masterDocumentsOf, masterPhotoOf } from "@/features/studio";
-import { getStudioInfo } from "@/features/studio/server";
-import { JsonLd } from "@/components/ui/JsonLd";
+import { services } from "@/data/services";
+import { studioInfo } from "@/data/studio-info";
 import { env } from "@/lib/env";
 import { businessSchema, faqSchema, websiteSchema } from "@/lib/schema";
 import { buildMetadata } from "@/lib/seo";
 
 export const metadata = buildMetadata(pageSeo.home);
 
-// Services are edited in the admin; the page picks up changes within five minutes
-export const revalidate = 300;
-
-export default async function HomePage() {
-  const [services, studioInfo] = await Promise.all([
-    getActiveServices(),
-    getStudioInfo(),
-  ]);
+export default function HomePage() {
   const [mainPhone] = studio.phones;
-  const uploadedDocuments = masterDocumentsOf(studioInfo);
 
   return (
     <main>
@@ -59,18 +50,15 @@ export default async function HomePage() {
       <MasterIntro
         title={master.name}
         paragraphs={[master.lead, master.audience]}
-        photo={masterPhotoOf(studioInfo, masterPage.photoAlt)}
-        documents={
-          uploadedDocuments.length > 0
-            ? uploadedDocuments
-            : masterDocumentPlaceholders
-        }
+        photo={studioInfo.masterPhoto}
+        photoAlt={masterPage.photoAlt}
+        documents={studioInfo.masterDocuments}
         moreLink={{ href: pageSeo.master.path, label: master.moreLink }}
       />
       <BookingSteps />
       <Location
         tone="dark"
-        entrance={studioInfo.entrance || contactsPage.entranceFallback}
+        entrance={studioInfo.entrance ?? contactsPage.entranceFallback}
       />
       <Faq />
     </main>

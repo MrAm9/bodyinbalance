@@ -3,17 +3,13 @@ import { Location } from "@/components/sections/location/Location";
 import { StudioDetails } from "@/components/sections/studio-details/StudioDetails";
 import { contactsPage } from "@/data/pages";
 import { pageSeo } from "@/data/seo";
-import { getStudioInfo } from "@/features/studio/server";
+import { studioInfo } from "@/data/studio-info";
 import { env } from "@/lib/env";
 import { buildMetadata } from "@/lib/seo";
 
 export const metadata = buildMetadata(pageSeo.contacts);
 
-export const revalidate = 300;
-
-export default async function ContactsPage() {
-  const studioInfo = await getStudioInfo();
-
+export default function ContactsPage() {
   return (
     <main>
       <PageHeader

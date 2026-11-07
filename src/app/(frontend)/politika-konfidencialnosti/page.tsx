@@ -2,17 +2,14 @@ import { PageHeader } from "@/components/layout/PageHeader";
 import { studio } from "@/data/contacts";
 import { privacyPage } from "@/data/privacy";
 import { pageSeo } from "@/data/seo";
-import { getStudioInfo } from "@/features/studio/server";
+import { studioInfo } from "@/data/studio-info";
 import { env } from "@/lib/env";
 import { buildMetadata } from "@/lib/seo";
 import { typograph } from "@/lib/typograph";
 
 export const metadata = buildMetadata(pageSeo.privacy);
 
-export const revalidate = 300;
-
-export default async function PrivacyPage() {
-  const studioInfo = await getStudioInfo();
+export default function PrivacyPage() {
   const [mainPhone] = studio.phones;
   const operator = [
     studioInfo.legalName || `${studio.kind} «${studio.name}»`,

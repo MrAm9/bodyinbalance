@@ -1,22 +1,31 @@
-import type { Service } from "@/payload-types";
+export type Audience = "adults" | "children" | "pregnant" | "athletes";
 
-type ServiceDraft = Pick<
-  Service,
-  | "title"
-  | "slug"
-  | "summary"
-  | "audience"
-  | "options"
-  | "contraindications"
-  | "order"
->;
+export interface ServiceOption {
+  durationMinutes: number;
+  priceRub: number;
+}
+
+export interface Service {
+  title: string;
+  // Part of the page URL: /massazh/<slug>/
+  slug: string;
+  summary: string;
+  audience: Audience[];
+  // Durations in ascending order; the cheapest one is shown as "от" in lists
+  options: ServiceOption[];
+  contraindications: string;
+  // Paragraphs of "Как проходит сеанс"; a shared text is shown while it is empty
+  description?: string[];
+  faq?: { question: string; answer: string }[];
+  seo?: { title?: string; description?: string };
+}
 
 const commonContraindications =
   "Острые воспаления и повышенная температура, кожные заболевания в зоне массажа, тромбоз, онкологические заболевания. При хронических болезнях сначала посоветуйтесь с врачом.";
 
 // Names match the studio's Yandex Maps card; prices come from its "Цены" news post (2026-10-22)
-// TODO(content): summaries and contraindications are drafts for Oleg to review
-export const servicesDraft: ServiceDraft[] = [
+// TODO(content): summaries and contraindications are drafts for Oleg to review; add `description` and `faq` per massage when he writes them
+export const services: Service[] = [
   {
     title: "Миофасциальный массаж",
     slug: "miofascialnyj",
@@ -29,7 +38,6 @@ export const servicesDraft: ServiceDraft[] = [
       { durationMinutes: 90, priceRub: 5100 },
     ],
     contraindications: commonContraindications,
-    order: 10,
   },
   {
     title: "Антицеллюлитный массаж",
@@ -43,7 +51,6 @@ export const servicesDraft: ServiceDraft[] = [
       { durationMinutes: 90, priceRub: 5100 },
     ],
     contraindications: `${commonContraindications} Варикоз в зоне массажа.`,
-    order: 20,
   },
   {
     title: "Лечебный массаж",
@@ -57,7 +64,6 @@ export const servicesDraft: ServiceDraft[] = [
       { durationMinutes: 90, priceRub: 5100 },
     ],
     contraindications: commonContraindications,
-    order: 30,
   },
   {
     title: "Восстановительный массаж",
@@ -71,7 +77,6 @@ export const servicesDraft: ServiceDraft[] = [
       { durationMinutes: 90, priceRub: 5100 },
     ],
     contraindications: commonContraindications,
-    order: 40,
   },
   {
     title: "Спортивный массаж",
@@ -85,7 +90,6 @@ export const servicesDraft: ServiceDraft[] = [
       { durationMinutes: 90, priceRub: 5100 },
     ],
     contraindications: `${commonContraindications} Свежие травмы и растяжения.`,
-    order: 50,
   },
   {
     title: "Детский массаж",
@@ -99,7 +103,6 @@ export const servicesDraft: ServiceDraft[] = [
       { durationMinutes: 90, priceRub: 5100 },
     ],
     contraindications: commonContraindications,
-    order: 60,
   },
   {
     title: "Массаж лица",
@@ -113,7 +116,6 @@ export const servicesDraft: ServiceDraft[] = [
       { durationMinutes: 90, priceRub: 5100 },
     ],
     contraindications: `${commonContraindications} Воспаления и высыпания на лице.`,
-    order: 70,
   },
   {
     title: "Массаж для беременных",
@@ -127,7 +129,6 @@ export const servicesDraft: ServiceDraft[] = [
       { durationMinutes: 90, priceRub: 5100 },
     ],
     contraindications: `${commonContraindications} Угроза прерывания беременности, токсикоз, высокое давление. Нужно разрешение врача, ведущего беременность.`,
-    order: 80,
   },
   {
     title: "Массаж с элементами мануальных техник",
@@ -141,7 +142,6 @@ export const servicesDraft: ServiceDraft[] = [
       { durationMinutes: 90, priceRub: 5100 },
     ],
     contraindications: `${commonContraindications} Грыжи и протрузии в острой стадии, остеопороз.`,
-    order: 90,
   },
   {
     title: "Оздоровительный массаж",
@@ -155,6 +155,5 @@ export const servicesDraft: ServiceDraft[] = [
       { durationMinutes: 90, priceRub: 5100 },
     ],
     contraindications: commonContraindications,
-    order: 100,
   },
 ];

@@ -1,15 +1,11 @@
 import type { MetadataRoute } from "next";
 
 import { pageSeo } from "@/data/seo";
-import { getActiveServices } from "@/features/services/server";
+import { services } from "@/data/services";
 import { env } from "@/lib/env";
 import { absoluteUrl } from "@/lib/schema";
 
-export const revalidate = 3600;
-
-export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const services = await getActiveServices();
-
+export default function sitemap(): MetadataRoute.Sitemap {
   const staticPages = Object.values(pageSeo).map((page) => ({
     url: absoluteUrl(env.SITE_URL, page.path),
     changeFrequency: "monthly" as const,
@@ -18,7 +14,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   const servicePages = services.map((service) => ({
     url: absoluteUrl(env.SITE_URL, `/massazh/${service.slug}/`),
-    lastModified: service.updatedAt,
     changeFrequency: "monthly" as const,
     priority: 0.8,
   }));

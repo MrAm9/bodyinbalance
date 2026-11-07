@@ -3,19 +3,19 @@ import Image from "next/image";
 import { cn } from "@/lib/utils";
 
 interface PortraitPhoto {
-  url: string;
-  alt: string;
+  src: string;
   width: number;
   height: number;
 }
 
 interface PortraitProps {
   photo: PortraitPhoto | null;
+  alt: string;
   className?: string;
 }
 
 // Until a real photo is uploaded the studio emblem stands in
-export function Portrait({ photo, className }: PortraitProps) {
+export function Portrait({ photo, alt, className }: PortraitProps) {
   return (
     <div
       className={cn(
@@ -25,8 +25,8 @@ export function Portrait({ photo, className }: PortraitProps) {
     >
       {photo ? (
         <Image
-          src={photo.url}
-          alt={photo.alt}
+          src={photo.src}
+          alt={alt}
           width={photo.width}
           height={photo.height}
           sizes="(min-width: 768px) 24rem, 90vw"

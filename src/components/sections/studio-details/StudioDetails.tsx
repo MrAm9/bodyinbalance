@@ -1,7 +1,7 @@
 import { Reveal } from "@/components/ui/Reveal";
 import { contactsPage } from "@/data/pages";
 import { typograph } from "@/lib/typograph";
-import type { StudioInfo } from "@/payload-types";
+import type { StudioInfo } from "@/data/studio-info";
 
 interface StudioDetailsProps {
   info: Pick<StudioInfo, "entrance" | "parking" | "legalName" | "inn" | "ogrn">;

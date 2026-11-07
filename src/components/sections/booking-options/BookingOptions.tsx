@@ -5,7 +5,7 @@ import { bookingPage } from "@/data/pages";
 import { formatRub, sharedPriceList } from "@/features/services";
 import { ru } from "@/i18n/ru";
 import { typograph } from "@/lib/typograph";
-import type { Service } from "@/payload-types";
+import type { Service } from "@/data/services";
 
 interface BookingOptionsProps {
   services: Service[];
@@ -74,7 +74,7 @@ export function BookingOptions({ services }: BookingOptionsProps) {
             <dl className="mt-6 grid grid-cols-3 gap-4 border-t border-gold-deep/40 pt-6">
               {sharedPrices.map((option) => (
                 <div
-                  key={option.id ?? option.durationMinutes}
+                  key={option.durationMinutes}
                   className="flex flex-col-reverse gap-1"
                 >
                   <dt className="text-sm text-ink-muted">

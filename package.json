@@ -9,27 +9,16 @@
     "lint": "eslint .",
     "typecheck": "next typegen && tsc --noEmit",
     "format": "prettier --write .",
-    "payload": "payload",
-    "generate:types": "payload generate:types",
-    "generate:importmap": "payload generate:importmap",
-    "test": "vitest run",
-    "seed": "payload run src/seed.ts"
+    "test": "vitest run"
   },
   "dependencies": {
     "@gsap/react": "^2.1.2",
-    "@payloadcms/db-postgres": "^3.92.1",
-    "@payloadcms/next": "^3.92.1",
-    "@payloadcms/richtext-lexical": "^3.92.1",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
-    "graphql": "^16.14.2",
     "gsap": "^3.15.0",
     "next": "16.4.3",
-    "payload": "^3.92.1",
     "react": "19.3.0",
     "react-dom": "19.3.0",
-    "server-only": "^0.0.1",
-    "sharp": "^0.35.4",
     "tailwind-merge": "^3.7.0",
     "zod": "^4.6.7"
   },

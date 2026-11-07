@@ -1,16 +1,9 @@
 import { z } from "zod";
 
 const envSchema = z.object({
-  DATABASE_URL: z.url({
-    error: "DATABASE_URL должен быть строкой подключения к PostgreSQL",
-  }),
   SITE_URL: z.url({
-    error:
-      "SITE_URL должен быть адресом сайта, например https://телоивбалансе.рф",
+    error: "SITE_URL должен быть полным адресом сайта, начиная с https://",
   }),
-  PAYLOAD_SECRET: z
-    .string()
-    .min(32, { error: "PAYLOAD_SECRET должен быть не короче 32 символов" }),
 });
 
 export const env = envSchema.parse(process.env);

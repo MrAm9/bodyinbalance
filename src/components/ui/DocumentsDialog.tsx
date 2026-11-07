@@ -8,7 +8,7 @@ import { buttonVariants } from "@/components/ui/button-variants";
 interface DialogDocument {
   id: string;
   title: string;
-  image: { url: string; width: number; height: number } | null;
+  image: { src: string; width: number; height: number } | null;
 }
 
 interface DocumentsDialogProps {
@@ -38,7 +38,7 @@ function DocumentFace({
   if (document.image) {
     return (
       <Image
-        src={document.image.url}
+        src={document.image.src}
         alt={document.title}
         width={document.image.width}
         height={document.image.height}

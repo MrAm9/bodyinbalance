@@ -1,27 +1,15 @@
 import { PageHeader } from "@/components/layout/PageHeader";
 import { BookingSteps } from "@/components/sections/booking-steps/BookingSteps";
 import { MasterIntro } from "@/components/sections/master-intro/MasterIntro";
-import { masterDocumentPlaceholders } from "@/data/master";
 import { masterPage } from "@/data/pages";
 import { pageSeo } from "@/data/seo";
-import {
-  masterDocumentsOf,
-  masterPhotoOf,
-  paragraphsOf,
-} from "@/features/studio";
-import { getStudioInfo } from "@/features/studio/server";
+import { studioInfo } from "@/data/studio-info";
 import { env } from "@/lib/env";
 import { buildMetadata } from "@/lib/seo";
 
 export const metadata = buildMetadata(pageSeo.master);
 
-export const revalidate = 300;
-
-export default async function MasterPage() {
-  const studioInfo = await getStudioInfo();
-  const about = paragraphsOf(studioInfo.masterAbout);
-  const uploadedDocuments = masterDocumentsOf(studioInfo);
-
+export default function MasterPage() {
   return (
     <main>
       <PageHeader
@@ -33,13 +21,10 @@ export default async function MasterPage() {
       />
       <MasterIntro
         title={masterPage.aboutTitle}
-        paragraphs={about.length > 0 ? about : [...masterPage.aboutFallback]}
-        photo={masterPhotoOf(studioInfo, masterPage.photoAlt)}
-        documents={
-          uploadedDocuments.length > 0
-            ? uploadedDocuments
-            : masterDocumentPlaceholders
-        }
+        paragraphs={studioInfo.masterAbout}
+        photo={studioInfo.masterPhoto}
+        photoAlt={masterPage.photoAlt}
+        documents={studioInfo.masterDocuments}
       />
       <BookingSteps />
     </main>

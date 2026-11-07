@@ -1,6 +1,4 @@
-import type { Service } from "@/payload-types";
-
-type Audience = NonNullable<Service["audience"]>[number];
+import type { Audience } from "@/data/services";
 
 export const audienceLabels = {
   adults: "Взрослые",

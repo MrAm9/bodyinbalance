@@ -1,6 +1,4 @@
-import type { Service } from "@/payload-types";
-
-type ServiceOption = Service["options"][number];
+import type { Service, ServiceOption } from "@/data/services";
 
 export function lowestPrice(service: Pick<Service, "options">): number {
   return Math.min(...service.options.map((option) => option.priceRub));

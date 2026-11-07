@@ -4,7 +4,7 @@ import { Reveal } from "@/components/ui/Reveal";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { homeConcerns } from "@/data/home";
 import { typograph } from "@/lib/typograph";
-import type { Service } from "@/payload-types";
+import type { Service } from "@/data/services";
 
 interface ConcernsProps {
   services: Service[];
@@ -58,7 +58,7 @@ export function Concerns({ services }: ConcernsProps) {
                 {linkedServices.length > 0 && (
                   <ul className="flex flex-col items-start gap-2 text-sm sm:col-span-2 sm:pt-1.5">
                     {linkedServices.map((service) => (
-                      <li key={service.id}>
+                      <li key={service.slug}>
                         <Link
                           href={`/massazh/${service.slug}/`}
                           className="text-olive underline decoration-olive/30 underline-offset-4 transition-colors hover:decoration-olive"

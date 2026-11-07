@@ -4,17 +4,13 @@ import { Concerns } from "@/components/sections/concerns/Concerns";
 import { ServicesMenu } from "@/components/sections/services-menu/ServicesMenu";
 import { servicesPage } from "@/data/pages";
 import { pageSeo } from "@/data/seo";
-import { getActiveServices } from "@/features/services/server";
+import { services } from "@/data/services";
 import { env } from "@/lib/env";
 import { buildMetadata } from "@/lib/seo";
 
 export const metadata = buildMetadata(pageSeo.services);
 
-export const revalidate = 300;
-
-export default async function ServicesPage() {
-  const services = await getActiveServices();
-
+export default function ServicesPage() {
   return (
     <main>
       <PageHeader

@@ -7,7 +7,7 @@ import { formatRub, lowestPrice } from "@/features/services";
 import { ru } from "@/i18n/ru";
 import { faqSchema } from "@/lib/schema";
 import { typograph } from "@/lib/typograph";
-import type { Service } from "@/payload-types";
+import type { Service } from "@/data/services";
 
 interface ServiceFaqAndOthersProps {
   service: Service;
@@ -38,7 +38,7 @@ export function ServiceFaqAndOthers({
             <div className="mt-6">
               {faq.map((item) => (
                 <details
-                  key={item.id ?? item.question}
+                  key={item.question}
                   data-reveal
                   className="border-t border-ink/15 last:border-b"
                 >
@@ -60,7 +60,11 @@ export function ServiceFaqAndOthers({
           </h2>
           <ul className="mt-6 grid gap-x-12 sm:grid-cols-2 lg:grid-cols-3">
             {otherServices.map((other) => (
-              <li key={other.id} data-reveal className="border-t border-ink/15">
+              <li
+                key={other.slug}
+                data-reveal
+                className="border-t border-ink/15"
+              >
                 <Link
                   href={`/massazh/${other.slug}/`}
                   className="flex items-baseline justify-between gap-4 py-4 text-ink transition-colors hover:text-olive"

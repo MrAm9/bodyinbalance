@@ -5,13 +5,14 @@ import { Portrait } from "@/components/ui/Portrait";
 import { Reveal } from "@/components/ui/Reveal";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { master, masterDocumentsDialog } from "@/data/master";
-import type { MasterDocument } from "@/features/studio";
+import type { MasterDocument } from "@/data/studio-info";
 import { typograph } from "@/lib/typograph";
 
 interface MasterIntroProps {
   title: string;
   paragraphs: string[];
-  photo: { url: string; alt: string; width: number; height: number } | null;
+  photo: { src: string; width: number; height: number } | null;
+  photoAlt: string;
   documents: readonly MasterDocument[];
   moreLink?: { href: string; label: string };
 }
@@ -20,6 +21,7 @@ export function MasterIntro({
   title,
   paragraphs,
   photo,
+  photoAlt,
   documents,
   moreLink,
 }: MasterIntroProps) {
@@ -32,7 +34,7 @@ export function MasterIntro({
         className="mx-auto grid max-w-6xl items-center gap-14 px-5 md:grid-cols-12 lg:px-10"
       >
         <div data-reveal className="md:col-span-5">
-          <Portrait photo={photo} />
+          <Portrait photo={photo} alt={photoAlt} />
         </div>
 
         <div className="md:col-span-7">

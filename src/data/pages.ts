@@ -13,7 +13,7 @@ export const servicePage = {
   faqTitle: "Вопросы",
   otherTitle: "Другие виды массажа",
   action: "Записаться",
-  // TODO(content): Oleg's own description of each massage goes into the admin "Подробное описание" field
+  // Shown while a massage in src/data/services.ts has no own `description`
   descriptionFallback:
     "Перед первым сеансом Олег расспросит о самочувствии и задаче, а потом подберёт технику и силу нажима. Сеанс проходит на массажном столе с маслом, после него можно немного полежать и выпить воды.",
 } as const;
@@ -22,11 +22,6 @@ export const masterPage = {
   eyebrow: "Мастер",
   title: "Олег Андреев, массажист",
   lead: "Олег ведёт все сеансы в студии сам. Работает со взрослыми, детьми и беременными.",
-  // TODO(content): replaced by the "О мастере" field in the admin once Oleg writes it
-  aboutFallback: [
-    "Олег принимает сам, без ассистентов и подмен: вы каждый раз приходите к одному специалисту, который помнит, с чем вы были в прошлый раз.",
-    "Перед сеансом он расспрашивает о самочувствии и задаче и подбирает технику под неё, а не работает по одной схеме для всех.",
-  ],
   aboutTitle: "Как работает Олег",
   photoAlt: "Олег Андреев, массажист студии «Тело в балансе»",
 } as const;
