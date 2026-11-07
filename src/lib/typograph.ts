@@ -6,9 +6,13 @@ const shortWords =
 
 const hangingWord = new RegExp(`(^|[\\s(«])(${shortWords}) `, "giu");
 
+// A dash must not start a new line, so it is glued to the word before it
+const looseDash = / —/g;
+
 export function typograph(text: string): string {
   // Runs twice because adjacent short words ("и в") share the space between them
   return text
     .replace(hangingWord, `$1$2${NBSP}`)
-    .replace(hangingWord, `$1$2${NBSP}`);
+    .replace(hangingWord, `$1$2${NBSP}`)
+    .replace(looseDash, `${NBSP}—`);
 }

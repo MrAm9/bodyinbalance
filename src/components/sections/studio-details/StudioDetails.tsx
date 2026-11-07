@@ -21,9 +21,9 @@ export function StudioDetails({ info }: StudioDetailsProps) {
     >
       <Reveal
         trigger="scroll"
-        className="mx-auto grid max-w-6xl gap-12 px-5 md:grid-cols-3 lg:px-10"
+        className="mx-auto flex max-w-6xl flex-wrap gap-x-16 gap-y-12 px-5 lg:px-10"
       >
-        <div data-reveal>
+        <div data-reveal className="max-w-md min-w-64 flex-1">
           <h2 className="font-display text-2xl text-ink">
             {contactsPage.entranceTitle}
           </h2>
@@ -33,7 +33,7 @@ export function StudioDetails({ info }: StudioDetailsProps) {
         </div>
 
         {info.parking && (
-          <div data-reveal>
+          <div data-reveal className="max-w-md min-w-64 flex-1">
             <h2 className="font-display text-2xl text-ink">
               {contactsPage.parkingTitle}
             </h2>
@@ -44,7 +44,7 @@ export function StudioDetails({ info }: StudioDetailsProps) {
         )}
 
         {legalLines.length > 0 && (
-          <div data-reveal>
+          <div data-reveal className="max-w-md min-w-64 flex-1">
             <h2 className="font-display text-2xl text-ink">
               {contactsPage.legalTitle}
             </h2>

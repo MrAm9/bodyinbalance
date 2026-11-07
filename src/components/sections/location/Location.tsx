@@ -108,7 +108,10 @@ export function Location({ tone, entrance }: LocationProps) {
               {homeLocation.labels.hours}
             </dt>
             <dd className="mt-3 font-display text-2xl">
-              {studio.hours.days}, {studio.hours.opens}–{studio.hours.closes}
+              {studio.hours.days},{" "}
+              <span className="whitespace-nowrap">
+                {studio.hours.opens}–{studio.hours.closes}
+              </span>
             </dd>
           </div>
           <div>

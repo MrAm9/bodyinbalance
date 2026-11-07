@@ -25,7 +25,7 @@ export function BookingSteps() {
           className="max-w-xl"
         />
 
-        <ol className="mt-16 grid gap-10 md:grid-cols-3 md:gap-8">
+        <ol className="mt-16 grid gap-10 lg:grid-cols-3 lg:gap-8">
           {homeBooking.steps.map((step, position) => (
             <li
               key={step.id}

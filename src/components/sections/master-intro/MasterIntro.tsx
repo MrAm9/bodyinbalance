@@ -31,13 +31,13 @@ export function MasterIntro({
     <section aria-labelledby="master-title" className="bg-paper py-24 sm:py-32">
       <Reveal
         trigger="scroll"
-        className="mx-auto grid max-w-6xl items-center gap-14 px-5 md:grid-cols-12 lg:px-10"
+        className="mx-auto grid max-w-6xl items-center gap-14 px-5 lg:grid-cols-12 lg:px-10"
       >
-        <div data-reveal className="md:col-span-5">
+        <div data-reveal className="lg:col-span-5">
           <Portrait photo={photo} alt={photoAlt} />
         </div>
 
-        <div className="md:col-span-7">
+        <div className="lg:col-span-7">
           <SectionHeading
             id="master-title"
             eyebrow={master.eyebrow}

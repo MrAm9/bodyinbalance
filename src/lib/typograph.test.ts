@@ -25,4 +25,10 @@ describe("typograph", () => {
     expect(typograph("Вход со двора")).toBe(`Вход со${NBSP}двора`);
     expect(typograph("Внутри тепло")).toBe("Внутри тепло");
   });
+
+  it("glues a dash to the word before it", () => {
+    expect(typograph("позвоните — Олег подскажет")).toBe(
+      `позвоните${NBSP}— Олег подскажет`,
+    );
+  });
 });
