@@ -50,7 +50,7 @@ export function PhotoGallery({ photos, labels }: PhotoGalleryProps) {
                 width={item.width}
                 height={item.height}
                 sizes="(min-width: 768px) 30vw, 50vw"
-                className="size-full object-cover transition-transform duration-700 group-hover:scale-105"
+                className="size-full object-cover transition-opacity duration-500 group-hover:opacity-85"
               />
             </button>
           </li>
