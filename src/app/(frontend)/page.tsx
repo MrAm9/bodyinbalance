@@ -6,13 +6,13 @@ import { Location } from "@/components/sections/location/Location";
 import { MasterIntro } from "@/components/sections/master-intro/MasterIntro";
 import { ServicesMenu } from "@/components/sections/services-menu/ServicesMenu";
 import { StudioGallery } from "@/components/sections/studio-gallery/StudioGallery";
-import { master } from "@/data/master";
+import { master, masterDocumentPlaceholders } from "@/data/master";
 import { contactsPage, masterPage } from "@/data/pages";
 import { pageSeo } from "@/data/seo";
 import { homeFaq } from "@/data/faq";
 import { studio } from "@/data/contacts";
 import { getActiveServices } from "@/features/services/server";
-import { masterPhotoOf } from "@/features/studio";
+import { masterDocumentsOf, masterPhotoOf } from "@/features/studio";
 import { getStudioInfo } from "@/features/studio/server";
 import { JsonLd } from "@/components/ui/JsonLd";
 import { env } from "@/lib/env";
@@ -30,6 +30,7 @@ export default async function HomePage() {
     getStudioInfo(),
   ]);
   const [mainPhone] = studio.phones;
+  const uploadedDocuments = masterDocumentsOf(studioInfo);
 
   return (
     <main>
@@ -59,10 +60,16 @@ export default async function HomePage() {
         title={master.name}
         paragraphs={[master.lead, master.audience]}
         photo={masterPhotoOf(studioInfo, masterPage.photoAlt)}
+        documents={
+          uploadedDocuments.length > 0
+            ? uploadedDocuments
+            : masterDocumentPlaceholders
+        }
         moreLink={{ href: pageSeo.master.path, label: master.moreLink }}
       />
       <BookingSteps />
       <Location
+        tone="dark"
         entrance={studioInfo.entrance || contactsPage.entranceFallback}
       />
       <Faq />

@@ -1,9 +1,14 @@
 import { PageHeader } from "@/components/layout/PageHeader";
 import { BookingSteps } from "@/components/sections/booking-steps/BookingSteps";
 import { MasterIntro } from "@/components/sections/master-intro/MasterIntro";
+import { masterDocumentPlaceholders } from "@/data/master";
 import { masterPage } from "@/data/pages";
 import { pageSeo } from "@/data/seo";
-import { masterPhotoOf, paragraphsOf } from "@/features/studio";
+import {
+  masterDocumentsOf,
+  masterPhotoOf,
+  paragraphsOf,
+} from "@/features/studio";
 import { getStudioInfo } from "@/features/studio/server";
 import { env } from "@/lib/env";
 import { buildMetadata } from "@/lib/seo";
@@ -15,6 +20,7 @@ export const revalidate = 300;
 export default async function MasterPage() {
   const studioInfo = await getStudioInfo();
   const about = paragraphsOf(studioInfo.masterAbout);
+  const uploadedDocuments = masterDocumentsOf(studioInfo);
 
   return (
     <main>
@@ -29,6 +35,11 @@ export default async function MasterPage() {
         title={masterPage.aboutTitle}
         paragraphs={about.length > 0 ? about : [...masterPage.aboutFallback]}
         photo={masterPhotoOf(studioInfo, masterPage.photoAlt)}
+        documents={
+          uploadedDocuments.length > 0
+            ? uploadedDocuments
+            : masterDocumentPlaceholders
+        }
       />
       <BookingSteps />
     </main>

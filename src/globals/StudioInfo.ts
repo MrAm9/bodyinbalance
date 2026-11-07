@@ -40,6 +40,32 @@ export const StudioInfo: GlobalConfig = {
               },
             },
             {
+              name: "masterDocuments",
+              label: "Документы мастера",
+              labels: { singular: "Документ", plural: "Документы" },
+              type: "array",
+              maxRows: 6,
+              admin: {
+                description:
+                  "Дипломы и сертификаты. Перед загрузкой закройте серию, номер и личные данные, которые не должны быть видны всем.",
+              },
+              fields: [
+                {
+                  name: "title",
+                  label: "Название",
+                  type: "text",
+                  required: true,
+                },
+                {
+                  name: "scan",
+                  label: "Скан или фото",
+                  type: "upload",
+                  relationTo: "media",
+                  required: true,
+                },
+              ],
+            },
+            {
               name: "masterAbout",
               label: "О мастере",
               type: "textarea",

@@ -524,6 +524,16 @@ export interface StudioInfo {
    */
   masterPhoto?: (number | null) | Media;
   /**
+   * Дипломы и сертификаты. Перед загрузкой закройте серию, номер и личные данные, которые не должны быть видны всем.
+   */
+  masterDocuments?:
+    | {
+        title: string;
+        scan: number | Media;
+        id?: string | null;
+      }[]
+    | null;
+  /**
    * Стаж, образование, курсы, с чем чаще приходят. Абзацы разделяйте пустой строкой.
    */
   masterAbout?: string | null;
@@ -562,6 +572,13 @@ export interface StudioInfoSelect<T extends boolean = true> {
   entrance?: T;
   parking?: T;
   masterPhoto?: T;
+  masterDocuments?:
+    | T
+    | {
+        title?: T;
+        scan?: T;
+        id?: T;
+      };
   masterAbout?: T;
   legalName?: T;
   inn?: T;

@@ -23,3 +23,27 @@ export function paragraphsOf(text: string | null | undefined): string[] {
     .map((paragraph) => paragraph.trim())
     .filter((paragraph) => paragraph !== "");
 }
+
+export interface MasterDocument {
+  id: string;
+  title: string;
+  image: { url: string; width: number; height: number } | null;
+}
+
+// Rows whose scan is not populated (depth 0) or lacks dimensions are skipped rather than shown broken
+export function masterDocumentsOf(
+  info: Pick<StudioInfo, "masterDocuments">,
+): MasterDocument[] {
+  return (info.masterDocuments ?? []).flatMap((row) => {
+    const scan = row.scan;
+    if (typeof scan !== "object" || !scan.url || !scan.width || !scan.height)
+      return [];
+    return [
+      {
+        id: row.id ?? scan.url,
+        title: row.title,
+        image: { url: scan.url, width: scan.width, height: scan.height },
+      },
+    ];
+  });
+}

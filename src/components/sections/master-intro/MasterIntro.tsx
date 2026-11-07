@@ -1,15 +1,18 @@
 import Link from "next/link";
 
+import { DocumentsDialog } from "@/components/ui/DocumentsDialog";
 import { Portrait } from "@/components/ui/Portrait";
 import { Reveal } from "@/components/ui/Reveal";
 import { SectionHeading } from "@/components/ui/SectionHeading";
-import { master } from "@/data/master";
+import { master, masterDocumentsDialog } from "@/data/master";
+import type { MasterDocument } from "@/features/studio";
 import { typograph } from "@/lib/typograph";
 
 interface MasterIntroProps {
   title: string;
   paragraphs: string[];
   photo: { url: string; alt: string; width: number; height: number } | null;
+  documents: readonly MasterDocument[];
   moreLink?: { href: string; label: string };
 }
 
@@ -17,6 +20,7 @@ export function MasterIntro({
   title,
   paragraphs,
   photo,
+  documents,
   moreLink,
 }: MasterIntroProps) {
   const [lead, ...rest] = paragraphs;
@@ -82,6 +86,13 @@ export function MasterIntro({
               </div>
             ))}
           </dl>
+
+          <div data-reveal className="flex flex-wrap items-center gap-x-8">
+            <DocumentsDialog
+              documents={documents}
+              labels={masterDocumentsDialog}
+            />
+          </div>
 
           {moreLink && (
             <Link

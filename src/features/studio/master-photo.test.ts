@@ -1,6 +1,10 @@
 import { describe, expect, it } from "vitest";
 
-import { masterPhotoOf, paragraphsOf } from "@/features/studio/master-photo";
+import {
+  masterDocumentsOf,
+  masterPhotoOf,
+  paragraphsOf,
+} from "@/features/studio/master-photo";
 
 const media = {
   id: 1,
@@ -36,5 +40,21 @@ describe("paragraphsOf", () => {
 
   it("returns nothing for an empty field", () => {
     expect(paragraphsOf(null)).toEqual([]);
+  });
+});
+
+describe("masterDocumentsOf", () => {
+  it("returns nothing when no documents are uploaded", () => {
+    expect(masterDocumentsOf({ masterDocuments: null })).toEqual([]);
+  });
+
+  it("keeps populated scans and skips bare ids", () => {
+    const documents = masterDocumentsOf({
+      masterDocuments: [
+        { id: "a", title: "Диплом", scan: media },
+        { id: "b", title: "Сертификат", scan: 7 },
+      ],
+    });
+    expect(documents.map((document) => document.title)).toEqual(["Диплом"]);
   });
 });
