@@ -23,7 +23,7 @@ export default async function ContactsPage() {
         title={contactsPage.title}
         lead={contactsPage.lead}
       />
-      <Location />
+      <Location tone="light" />
       <StudioDetails info={studioInfo} />
     </main>
   );

@@ -17,7 +17,7 @@ export function StudioDetails({ info }: StudioDetailsProps) {
   return (
     <section
       aria-label={contactsPage.entranceTitle}
-      className="bg-paper py-20 sm:py-28"
+      className="bg-marble py-20 sm:py-28"
     >
       <Reveal
         trigger="scroll"
