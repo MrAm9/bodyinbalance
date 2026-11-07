@@ -1,9 +1,3 @@
-import { z } from "zod";
+import { parseEnv } from "@/lib/parse-env";
 
-const envSchema = z.object({
-  SITE_URL: z.url({
-    error: "SITE_URL должен быть полным адресом сайта, начиная с https://",
-  }),
-});
-
-export const env = envSchema.parse(process.env);
+export const env = parseEnv(process.env);
